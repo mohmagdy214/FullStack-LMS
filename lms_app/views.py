@@ -24,12 +24,14 @@ def index(request):
     }
     return render(request, 'pages/index.html', context)
 
+
 def books(request):
     context = {
         'categories': Category.objects.all(),
         'books': Book.objects.all(), 
     }
     return render(request, 'pages/books.html', context)
+
 
 def update(request, id):
     book_id = Book.objects.get(id=id)
@@ -46,3 +48,11 @@ def update(request, id):
         'form':book_save,
     }
     return render(request, 'pages/update.html', context)
+
+
+def delete(request, id):
+    book_delete = Book.objects.get(id=id)
+    if request.method == 'POST':
+        book_delete.delete()
+        return redirect('/')
+    return render(request, 'pages/delete.html')
