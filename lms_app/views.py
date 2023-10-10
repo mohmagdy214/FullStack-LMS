@@ -17,7 +17,7 @@ def index(request):
 
 
     context = {
-        'categories': Category.objects.all(),
+        'category': Category.objects.all(),
         'books': Book.objects.all(),
         'form': BookForm(),
         'formcat': CategoryForm(),
@@ -27,7 +27,7 @@ def index(request):
 
 def books(request):
     context = {
-        'categories': Category.objects.all(),
+        'category': Category.objects.all(),
         'books': Book.objects.all(), 
     }
     return render(request, 'pages/books.html', context)
