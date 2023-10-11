@@ -56,6 +56,28 @@
 <!--<script src="dist/js/pages/dashboard3.js'"></script>
 -->
 <script>
+
+$(document).ready(function(){
+  var total = 0;
+  $('.totalprice').each(function(){
+    $(this).hide()
+    var salary = $(this).text()
+    total += parseInt(salary)
+  });
+  $("#totalsalarys").text(total + ' EP')
+});
+
+
+
+
+
+
+
+$("#rentalperiod").keyup(function(){
+  $("#totalrental").val($("#rentalperiod").val()*$("#rentalprice").val())
+});
+
+
 $('#catinput').hide()
 $('#addcat').click(function(){
   $('#catinput').show()
@@ -185,13 +207,13 @@ $(function () {
     }
   });
   
- var pieChart = document.getElementById('visitors-chart').getContext('2d')
+  var pieChart = document.getElementById('visitors-chart').getContext('2d')
 
   var myPieChart = new Chart(pieChart, {
     type: 'pie',
     data: {
       datasets: [{
-        data: ['35','25','40'],
+        data: ['{{booksavailable}}','{{bookssold}}','{{booksrented}}'],
         backgroundColor :["#27c100","#f3545d","#fdaf4b"],
         borderWidth: 10,
         
