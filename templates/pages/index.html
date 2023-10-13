@@ -21,14 +21,14 @@
               <div class="card">
                 <div class="card-header border-0">
                   <div class="d-flex justify-content-between">
-                    <h3 class="card-title">اجمالي عدد الكتب</h3>                    
+                    <h3 class="card-title">Total number of books</h3>                    
                   </div>
                 </div>
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
                       <span class="text-bold text-lg">{{allbooks}}</span>
-                      <span>اجمالي عدد الكتب</span>
+                      <span>Percentage of number of books</span>
                     </p>  
                   </div>
                   <!-- /.d-flex -->
@@ -84,7 +84,7 @@
               <div class="card">
                 <div class="card-header border-0">
                   <div class="d-flex justify-content-between">
-                    <h3 class="card-title">الارباح</h3>   
+                    <h3 class="card-title ">Profits</h3>   
                   </div>
                 </div>    
                 <div class="card-body">
@@ -100,11 +100,11 @@
   
                   <div class="d-flex flex-row justify-content-end">
                     <span class="mr-2">
-                      <i class="fas fa-square text-primary"></i> الارباح من بيع الكتب
+                      <i class="fas fa-square text-primary"></i> Profits from selling books
                       <p id="soldtotals"></p>     
                     </span>
                     <span>
-                      <i class="fas fa-square text-gray"></i> الارباح من استعارة الكتب
+                      <i class="fas fa-square text-gray"></i> Profits from borrowing books
                       <p id="rentedtotals"></p>
                     </span>
                   </div>
@@ -118,12 +118,12 @@
   
           <!-- form add books -->
           <div class="row m-1 mb-3">   
-            <a href="#bookform" class="btn btn-primary" data-toggle="collapse">+ اضافة كتاب</a>
+            <a href="#bookform" class="btn btn-primary" data-toggle="collapse">+ Add New Book</a>
           </div>
           
           <div id="bookform" class="card card-primary collapse">
             <div class="card-header">
-              <h3 class="card-title">اضافة كتاب</h3>
+              <h3 class="card-title">Add Book</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -134,7 +134,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary">اضافة</button>
+                <button type="submit" class="btn btn-primary">Add</button>
               </div>
             </form>
           </div>
@@ -165,6 +165,7 @@
         {% for book in books %}
 
           <!-- الكتب -->
+          <a>
               <div id="" class="col-md-4 bookhide book{{book.category.id}} book{{book.status}}">
                   <!-- Widget: user widget style 1 -->
                 <div id="" class="card card-widget widget-user ">
@@ -175,21 +176,21 @@
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'update' book.id %}">تعديل</a>
-                    <a class="dropdown-item" href="{% url 'delete' book.id %}">حذف</a>
+                    <a class="dropdown-item" href="{% url 'update' book.id %}">Edit</a>
+                    <a class="dropdown-item" href="{% url 'delete' book.id %}">Delete</a>
                 <!-- Button trigger modal -->
                   </div>
                 </div>
               {% if book.photo_book %}
-                <div style="background: url({{book.photo_book.url}}); background-size: cover" class="widget-user-header bg-info">
+                <div  style="background: url({{book.photo_book.url}}); background-size: cover" class="widget-user-header bg-info">
 
               {% else %}
                 <div class="widget-user-header bg-info">  
 
               {% endif %}
 
-                  <h3 class="widget-user-username">{{book.title}}</h3>
-                  <h5 class="widget-user-desc">{{book.author}}</h5>
+                  <a href="{% url 'books' %}"><h3 class="widget-user-username">{{book.title}}</h3></a>
+                  <a href="{% url 'books' %}"><h5 class="widget-user-desc">{{book.author}}</h5></a>
                 </div>
                 <div class="widget-user-image">
                 {% if book.photo_author %}
@@ -201,7 +202,7 @@
                     <div class="col-sm-4 border-right">
                       <div class="description-block">
                         <h5 class="description-header">{{book.pages}}</h5>
-                        <span class="description-text">صفحة</span>
+                        <span class="description-text">pages</span>
                       </div>
                       <!-- /.description-block -->
                     </div>
@@ -210,10 +211,10 @@
                       <div class="description-block">
                       {% if book.price %}
                         <h5 class="description-header">${{book.price}}</h5>
-                        <span class="description-text">السعر</span>
+                        <span class="description-text">price</span>
                       {% elif book.rental_price_day %}
                         <h5 class="description-header">${{book.rental_price_day}}</h5>
-                        <span class="description-text">في اليوم</span>
+                        <span class="description-text">per day</span>
                       {% endif %}
                       </div>
                       <!-- /.description-block -->
@@ -223,15 +224,15 @@
                       <div class="description-block">
                       {% if book.status == 'Available' %}
                         <h5 class="description-header text-success">{{book.status}}</h5>
-                        <span class="description-text">الحالة</span>
+                        <span class="description-text">status</span>
 
                       {% elif book.status == 'Rented' %}
                         <h5 class="description-header text-warning">{{book.status}}</h5>
-                        <span class="description-text">الحالة</span>
+                        <span class="description-text">status</span>
 
                       {% elif book.status == 'Sold' %}
                         <h5 class="description-header text-danger">{{book.status}}</h5>
-                        <span class="description-text">الحالة</span>
+                        <span class="description-text">status</span>
                       {% endif %}
                       </div>
                       <!-- /.description-block -->
@@ -243,6 +244,7 @@
                 </div>
                   <!-- /.widget-user -->
               </div>
+              
           <!-- نهاية الكتاب -->
 
           {% endfor %}
